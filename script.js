@@ -1,4 +1,5 @@
 const choices = ['rock', 'paper', 'scissor']
+const rounds = prompt('Enter how many rounds you want to play: ')
 let computerScore = 0
 let playerScore = 0
 
@@ -7,42 +8,58 @@ let getComputerChoice = () => {
     return choices[randomIndex]
 }
 
-let computerSelection = getComputerChoice()
-console.log(`Computer Choice: ${computerSelection}`)
-
 let updateScores = (result) => {
-    if (result === "You win") {
-        playerScore++
-    } else if (result === "You loose") {
-        computerScore++
+    if (result === "You win!") {
+        playerScore++;
+    } else if (result === "You lose!") {
+        computerScore++;
     }
-}
+};
 
 let displayScores = () => {
     console.log(`Player Score: ${playerScore}`)
     console.log(`Computer Score: ${computerScore}`)
 }
 
-let game = () => {
-    let playerSelection = prompt('Choose rock, paper or scissor: ')
-    console.log(`Player Choice: ${playerSelection}`)
+let game = (play) => {
+    for (let round = 1; round <= play; round++) {
+        console.log(`Round ${round}`);
+        
+        let playerSelection;
+        while (true) {
+            playerSelection = prompt('Choose rock, paper, or scissor: ').toLowerCase();
+            console.log('Player choice: ', playerSelection);
 
-    if (!choices.includes(playerSelection.toLowerCase())) {
-        console.log("Wrong input")
+            if (choices.includes(playerSelection)) {
+                break;
+            } else {
+                console.log("Wrong input. Please choose rock, paper, or scissor.");
+            }
+        }
+
+        let computerSelection = getComputerChoice();
+        console.log('Computer choice: ', computerSelection);
+
+        if (playerSelection === computerSelection) {
+            console.log("It's a draw");
+        } else if (
+            (playerSelection === 'rock' && computerSelection === 'scissor') ||
+            (playerSelection === 'paper' && computerSelection === 'rock') ||
+            (playerSelection === 'scissor' && computerSelection === 'paper')
+        ) {
+            updateScores("You win!");
+            console.log("You win!");
+        } else {
+            updateScores("You lose!");
+            console.log("You lose!");
+        }
+
+        displayScores();
+        console.log('')
     }
-    
-    if (playerSelection.toLowerCase() === computerSelection) {
-        return "It's a draw"
-    } else if ((playerSelection.toLowerCase() === 'rock' && computerSelection === 'scissor' ) ||
-              (playerSelection.toLowerCase() === 'paper' && computerSelection === 'rock') ||
-              (playerSelection.toLowerCase() === 'scissor' && computerSelection === 'paper')
-              ) {
-        updateScores("You win")
-    } else {
-        updateScores("You loose")
-    } 
 
-    displayScores()
+    return playerScore > computerScore ? "You have won the game!" : "You have lost the game!"
 }
 
-game()
+let result = game(parseInt(rounds))
+console.log(result)
