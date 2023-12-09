@@ -18,13 +18,22 @@ let updateScores = (result) => {
     }
 }
 
+let displayScores = () => {
+    console.log(`Player Score: ${playerScore}`)
+    console.log(`Computer Score: ${computerScore}`)
+}
+
 let game = () => {
     let playerSelection = prompt('Choose rock, paper or scissor: ')
     console.log(`Player Choice: ${playerSelection}`)
+
+    if (!choices.includes(playerSelection.toLowerCase())) {
+        console.log("Wrong input")
+    }
     
     if (playerSelection.toLowerCase() === computerSelection) {
         return "It's a draw"
-    }getComputerChoice()
+    }
 
     if (playerSelection.toLowerCase() === 'rock') {
         return computerSelection === 'scissor' ? updateScores("You win") : updateScores("You loose")
@@ -32,11 +41,9 @@ let game = () => {
         return computerSelection === 'rock' ? updateScores("You win") : updateScores("You loose")
     } else if (playerSelection.toLowerCase() === 'scissor') {
         return computerSelection === 'paper' ? updateScores("You win") : updateScores("You loose")
-    } else {
-        return "Wrong input"
-    }
+    } 
+
 }
 
 game()
-console.log(`Player Score: ${playerScore}`)
-console.log(`Computer Score: ${computerScore}`)
+displayScores()
