@@ -33,17 +33,16 @@ let game = () => {
     
     if (playerSelection.toLowerCase() === computerSelection) {
         return "It's a draw"
-    }
-
-    if (playerSelection.toLowerCase() === 'rock') {
-        return computerSelection === 'scissor' ? updateScores("You win") : updateScores("You loose")
-    } else if (playerSelection.toLowerCase() === 'paper') {
-        return computerSelection === 'rock' ? updateScores("You win") : updateScores("You loose")
-    } else if (playerSelection.toLowerCase() === 'scissor') {
-        return computerSelection === 'paper' ? updateScores("You win") : updateScores("You loose")
+    } else if ((playerSelection.toLowerCase() === 'rock' && computerSelection === 'scissor' ) ||
+              (playerSelection.toLowerCase() === 'paper' && computerSelection === 'rock') ||
+              (playerSelection.toLowerCase() === 'scissor' && computerSelection === 'paper')
+              ) {
+        updateScores("You win")
+    } else {
+        updateScores("You loose")
     } 
 
+    displayScores()
 }
 
 game()
-displayScores()
