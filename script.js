@@ -7,10 +7,10 @@ let getComputerChoice = () => {
 
 let computerSelection = getComputerChoice()
 console.log('Computer choice: ', computerSelection)
-let playerSelection = prompt('Choose rock, paper or scissor: ')
-console.log('Player choice: ', playerSelection)
 
 let game = () => {
+    let playerSelection = prompt('Choose rock, paper or scissor: ')
+    console.log('Player choice: ', playerSelection)
     if (playerSelection.toLowerCase() === computerSelection) {
         return "It's a draw"
     }
