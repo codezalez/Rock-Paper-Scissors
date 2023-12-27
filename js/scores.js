@@ -10,6 +10,9 @@ export const updateScores = (result) => {
 };
 
 export const displayScores = () => {
-    console.log(`Player Score: ${playerScore}`);
-    console.log(`Computer Score: ${computerScore}`);
+    const playerScoreDisplay = document.querySelector('#player-score')
+    playerScoreDisplay.textContent = playerScore
+
+    const computerScoreDisplay = document.querySelector('#computer-score')
+    computerScoreDisplay.textContent = computerScore
 };
